@@ -1,11 +1,10 @@
-import { ActivityIndicator, Dimensions, StyleSheet, Text, useColorScheme, View } from 'react-native'
+import { ActivityIndicator, Dimensions, StyleSheet } from 'react-native'
 import React from 'react'
 import ThemedView from './ThemedView'
-import { Colors } from '../constants/Colors'
+import { useThemedColor } from '../utils/ThemedColor'
 
 const ThemedLoader = () => {
-  const colorScheme = useColorScheme()
-  const theme = Colors[colorScheme] ?? Colors.light
+  const theme = useThemedColor()
   return (
     <ThemedView style={styles.overlay}>
       <ActivityIndicator size='large' color={theme.textColor}/>

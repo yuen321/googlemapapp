@@ -3,9 +3,10 @@ import React, { useRef } from 'react'
 import { GooglePlacesTextInputRef } from 'react-native-google-places-textinput'
 import { GOOGLE_PLACES_API_KEY, setLocatonName } from '../../state/mapSlice'
 import { useSelector } from 'react-redux'
-import ThemedView from '../ThemedView'
+import { useThemedColor } from '../../utils/ThemedColor'
 
 const GooglePlacesAutocomplete = ({handlePlaceSelect = () => {}}) => {
+  const theme = useThemedColor()
   const locationName = useSelector((state) => state.map.location?.name)
   const inputRef = useRef(null)
 
@@ -22,22 +23,34 @@ const GooglePlacesAutocomplete = ({handlePlaceSelect = () => {}}) => {
   };
 
   return (
-   <ThemedView style={styles.container}>
+   <View style={styles.container}>
     <GooglePlacesTextInputRef
     inputRef = {inputRef}
     apiKey={GOOGLE_PLACES_API_KEY}
     onPlaceSelect={onPlaceSelect}
     style={{
       container: styles.inputContainer,
-      input: styles.textInput,
-      suggestionsContainer : styles.suggestionsContainer
+      input: [styles.textInput, 
+        {
+          color: theme.text,
+          backgroundColor: theme.uiBackground,
+          borderColor: theme.border,
+          shadowColor: theme.shadow
+        }
+      ],
+      suggestionsContainer : [
+        styles.suggestionsContainer, 
+        {
+          backgroundColor: theme.background
+        }
+      ]
     }}
     placeHolderText="Search"
     minCharsToFetch={3}
     value={locationName}
     onTextChange={setLocatonName}
     />
-   </ThemedView>
+   </View>
   )
 }
 
@@ -49,27 +62,25 @@ const styles =  StyleSheet.create({
     height: '100%',
     backgroundColor: 'transparent',
     position: 'absolute',
+    marginTop: 10,
   },
   textInput: {
     borderWidth: 1,
-    borderColor: '#ccc',
     height: 47,
     borderRadius: 25,
     paddingLeft: 25,
-    shadowColor: '#000',
     shadowOffset: {width: 0, height: 1},
     shadowOpacity: 0.1,
     shadowRadius: 3,
     elevation: 2,
-    fontSize: 17
+    fontSize: 17,
   },
   inputContainer:{
     width: '100%',
     height: '100%',
-    paddingHorizontal: 16,
+    paddingHorizontal: 16
   },
   suggestionsContainer: {
-    backgroundColor: 'white',
     maxHeight: 300,
   },
 })

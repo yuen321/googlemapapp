@@ -1,15 +1,14 @@
-import { Link, useFocusEffect, useLocalSearchParams, useRouter } from "expo-router"
+import { router, useFocusEffect, useLocalSearchParams } from "expo-router"
 import { useCallback, useEffect, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { setInitialMapPosition } from "../state/mapSlice"
-import { StyleSheet, View } from "react-native"
+import { StyleSheet } from "react-native"
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps"
-import ThemedTextAutocomple from "../components/(map)/ThemedTextAutocomple"
-import ThemedMarker from "../components/(map)/ThemedMarker"
-import ThemedView from "../components/ThemedView"
+import ThemedView from "../../components/ThemedView"
+import { requestCurrentLocation} from "../../state/mapSlice"
+import ThemedTextAutocomple from "../../components/(map)/ThemedTextAutocomple"
+import ThemedMarker from "../../components/(map)/ThemedMarker"
 
 export default function GoogleMapScreen() {
-  const router = useRouter()
   const dispatch = useDispatch()
   const mapRef = useRef()
 
@@ -19,17 +18,18 @@ export default function GoogleMapScreen() {
 
   useEffect(() => {
     if(!skipInitialize){
-      dispatch(setInitialMapPosition())
+      dispatch(requestCurrentLocation())
     }
   }, [])
 
-
   useFocusEffect(useCallback(() => {
     if(mapRef.current && mapPosition.latitude && mapPosition.longitude){
-      mapRef.current?.animateCamera({center:markerCoordinate, zoom: 15}, {duration: 15})
+      // mapRef.current?.animateCamera({center:markerCoordinate, zoom: 15}, {duration: 15})
+      mapRef.current?.animateToRegion(mapPosition, 1000)
     }
   },[mapPosition.latitude, mapPosition.longitude]))
   
+
   const navigateSearchLocation = () => {
     router.push("/searchScreen")
   }
@@ -41,9 +41,11 @@ export default function GoogleMapScreen() {
       provider={PROVIDER_GOOGLE}
       style={styles.map}
       initialRegion={mapPosition}
+      showsUserLocation={true}
       >
-        <ThemedTextAutocomple text={location?.name} handleOnPress={navigateSearchLocation}/>
-        <ThemedMarker
+       <ThemedTextAutocomple safe text={location?.name} handleOnPress={navigateSearchLocation}/>
+      
+       <ThemedMarker
         latitude={latitude} 
         longitude = {longitude} 
         />

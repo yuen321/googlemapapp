@@ -1,14 +1,15 @@
 import { ActivityIndicator, FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import useMap from '../../hooks/useMap'
-import { Colors } from '../../constants/Colors'
 import MapHistoryListItem from './MapHistoryListItem'
 import ThemedText from '../ThemedText'
 import { useDispatch } from 'react-redux'
 import { setLocationNameDesc, setMarkerCoordinate, setMapPosition } from '../../state/mapSlice'
 import { router } from 'expo-router'
+import { useThemedColor } from '../../utils/ThemedColor'
 
-const MapHistoryList = ({numOfRecords = 0, enablePullToRefresh = true, enableDeletion= false}) => {
+const MapHistoryList = ({numOfRecords = 0, enablePullToRefresh = true, enableDeletion= false, scrollEnabled = true}) => {
+    const theme = useThemedColor()
     const dispatch = useDispatch()
     const{map, fetchMapHistory, deleteMapHistory} = useMap()
     const[isLoading] = useState(false)
@@ -39,12 +40,12 @@ const MapHistoryList = ({numOfRecords = 0, enablePullToRefresh = true, enableDel
     }
   
     if(isLoading){
-      <ActivityIndicator size='large' color={Colors.primary}/>
+      <ActivityIndicator size='large' color={theme.primary}/>
     }
     return (
         <FlatList
         refreshControl = { enablePullToRefresh &&
-          <RefreshControl refreshing={isLoading} onRefresh={fetchMapHistory} tintColor={Colors.primary}/>
+          <RefreshControl refreshing={isLoading} onRefresh={fetchMapHistory} tintColor={theme.primary}/>
         }
         data = {map}
         keyExtractor={(item) => item.id.toString()}
@@ -57,6 +58,7 @@ const MapHistoryList = ({numOfRecords = 0, enablePullToRefresh = true, enableDel
           />
         )}
         ListEmptyComponent={<ThemedText>No result found</ThemedText>}
+        scrollEnabled = {scrollEnabled}
         /> 
     )
   }

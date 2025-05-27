@@ -1,14 +1,13 @@
-import { StatusBar, StyleSheet, Text, useColorScheme, View } from 'react-native'
+import { StatusBar} from 'react-native'
 import { Provider } from 'react-redux'
 import { store } from '../store/store'
 import { Stack } from 'expo-router'
 import { SQLiteProvider } from 'expo-sqlite'
 import { DATABASE_NAME, MapProvider, migrateDbIfNeeded } from '../contexts/MapContext'
-import { Colors } from '../constants/Colors'
+import { useThemedColor } from '../utils/ThemedColor'
 
 const RootLayout = () => {
-  const colorScheme = useColorScheme()
-  const theme = Colors[colorScheme] ?? Colors.light
+  const theme = useThemedColor()
 
   return (
     <SQLiteProvider 
@@ -23,7 +22,6 @@ const RootLayout = () => {
               headerStyle:{backgroundColor: theme.navBackground},
               headerTintColor: theme.title
           }}>
-            <Stack.Screen name="index" options={{title: "Map ", headerShown: false}}/>
             <Stack.Screen name='(map)' options={{title: "Search Location", headerShown: false}}/>
         </Stack>
       </Provider>

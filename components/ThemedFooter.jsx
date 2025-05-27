@@ -1,17 +1,18 @@
 import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import ThemedText from './ThemedText'
-import { Colors } from 'react-native/Libraries/NewAppScreen'
 import ThemedButton from './ThemedButton'
+import ThemedView from './ThemedView'
+import { useThemedColor } from '../utils/ThemedColor'
 
 const ThemedFooter = ({text, handlePress = () => {}}) => {
-    
+    const theme = useThemedColor()
     return (
-        <View style={styles.container}>
+        <ThemedView safe style={styles.container}>
             <ThemedButton style={styles.textContainer} onPress={handlePress}>
-                <ThemedText title style={styles.text}>{text}</ThemedText>
+                <ThemedText title style={[styles.text, {color: theme.primary}]}>{text}</ThemedText>
             </ThemedButton>
-        </View>
+        </ThemedView>
     )
 }
 
@@ -26,12 +27,10 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: 'transparent',
         padding: 15,
-        marginVertical: 6,
         alignItems: 'center',
         justifyContent: 'center'
     },
     text: {
-        color: Colors.primary,
         fontWeight: 'bold'
     }
 
