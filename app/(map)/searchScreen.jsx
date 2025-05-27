@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import ThemedView from '../../components/ThemedView'
 import GooglePlacesAutocomplete from '../../components/(map)/GooglePlacesAutocomplete'
 import { useDispatch, useSelector } from 'react-redux'
-import { setLocationNameDesc, getPlaceDetailById, setShouldUpsertLocation, delayCallback, setLoading} from '../../state/mapSlice'
+import { setLocationNameDesc, getPlaceDetailById, setShouldUpsertLocation, delayCallback, setLoading, setShowInfo} from '../../state/mapSlice'
 import { router } from 'expo-router'
 import useMap from '../../hooks/useMap'
 import ThemedFooter from '../../components/ThemedFooter'
@@ -55,6 +55,7 @@ const SearchScreen = () => {
           await dispatch(delayCallback(0.5)).unwrap()
           dispatch(setShouldUpsertLocation(false))
           dispatch(setLoading(false))
+          dispatch(setShowInfo(true))
           router.back()
         }
       }catch(error){

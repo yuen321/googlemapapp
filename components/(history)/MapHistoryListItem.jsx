@@ -16,7 +16,7 @@ const MapHistoryListItem = ({data, handleSelection = () => {},  handleDeletion= 
           <ThemedText numberOfLines = {2} ellipsizeMode ='tail'>{description}</ThemedText>
         </View>
         {enableDeletion && <ThemedButton style={[{backgroundColor: 'transparent'}, styles.deleteButton]} onPress={() => handleDeletion(id)}>
-          <Ionicons name="trash" size={24} color={theme.iconColor} />
+          <Ionicons name="trash" size={26} color={theme.iconColor} />
         </ThemedButton>
        }
       </TouchableOpacity>

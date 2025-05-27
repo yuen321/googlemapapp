@@ -1,10 +1,10 @@
 import { ActivityIndicator, FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import useMap from '../../hooks/useMap'
 import MapHistoryListItem from './MapHistoryListItem'
 import ThemedText from '../ThemedText'
 import { useDispatch } from 'react-redux'
-import { setLocationNameDesc, setMarkerCoordinate, setMapPosition } from '../../state/mapSlice'
+import { setLocationNameDesc, setMarkerCoordinate, setMapPosition, setShowInfo } from '../../state/mapSlice'
 import { router } from 'expo-router'
 import { useThemedColor } from '../../utils/ThemedColor'
 
@@ -18,26 +18,27 @@ const MapHistoryList = ({numOfRecords = 0, enablePullToRefresh = true, enableDel
       fetchMapHistory(numOfRecords)
     }, [])
   
-    const handleDeletion = (id) => {
+    const handleDeletion = useCallback((id) => {
       try{
         deleteMapHistory(id)
       }catch(error){
         console.error("handleDeletion", error.message)
       }
-    }
+    }, []);
 
-    const handleSelection = (item) => {
+    const handleSelection = useCallback((item) => {
       try{
         const{name, description, latitude, longitude} = item
         dispatch(setMarkerCoordinate({latitude, longitude}))
         dispatch(setLocationNameDesc({name, description}))
         dispatch(setMapPosition({latitude, longitude}))
+        dispatch(setShowInfo(true))
         router.replace({ pathname: '/', params: {skipInitialize: true}})
         
       }catch(error){
         console.error("handleSelection", error.message)
       }
-    }
+    }, [])
   
     if(isLoading){
       <ActivityIndicator size='large' color={theme.primary}/>

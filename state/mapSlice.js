@@ -17,15 +17,13 @@ const initialState = {
     shouldUpsertLocation: false,
     isLoading: false,
     currentLocation: {},
-    error: null
+    showInfo: false
 }
 
 export const GOOGLE_PLACES_API_KEY = 'AIzaSyALED7L_auA5XwkOSlVamOnQfr2Sdd8528'
-const GOOGLE_BASE_URL = "https://maps.googleapis.com/maps/api/place"
 const PARAM_PLACE_ID = "placeid"
 const PARAM_KEY = "key"
 const STATUS_OK= "OK"
-const STATUS_ERROR= "Error"
 
 const mapSlice = createSlice({
     name: "map",
@@ -52,6 +50,9 @@ const mapSlice = createSlice({
         },
         setLoading:(state, action) => {
             state.isLoading = action.payload
+        },
+        setShowInfo:(state, action) => {
+            state.showInfo = action.payload
         }
     },
     extraReducers: (builder) =>{
@@ -142,6 +143,11 @@ export const delayCallback= createAsyncThunk(
     }
 )
 
-export const {setLocationNameDesc, setInitialMapPosition, setMarkerCoordinate, setShouldUpsertLocation, setMapPosition, setLoading} = mapSlice.actions
+export const {
+    setLocationNameDesc, 
+    setInitialMapPosition, setMarkerCoordinate, 
+    setShouldUpsertLocation, setMapPosition, 
+    setLoading, setShowInfo
+} = mapSlice.actions
 
 export default mapSlice.reducer
