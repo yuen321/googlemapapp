@@ -14,14 +14,8 @@ const initialState = {
         description: '',
     },
     markerCoordinate: {
-        latitude: null,
-        longitude: null
     },
     mapPosition: {
-        latitude: null,
-        longitude: null,
-        latitudeDelta: null,
-        longitudeDelta: null
     },
     shouldUpsertLocation: false,
     isLoading: false
