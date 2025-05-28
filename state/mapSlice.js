@@ -19,8 +19,6 @@ const initialState = {
     currentLocation: {},
     showInfo: false
 }
-
-export const GOOGLE_PLACES_API_KEY = 'AIzaSyALED7L_auA5XwkOSlVamOnQfr2Sdd8528'
 const PARAM_PLACE_ID = "placeid"
 const PARAM_KEY = "key"
 const STATUS_OK= "OK"
@@ -101,7 +99,7 @@ export const getPlaceDetailById = createAsyncThunk(
     const urlGooglePlaceDetail = new URL("https://maps.googleapis.com/maps/api/place/details/json?placeid=?&key=?")
     if(placeId){
         urlGooglePlaceDetail.searchParams.set(PARAM_PLACE_ID, placeId)
-        urlGooglePlaceDetail.searchParams.set(PARAM_KEY, GOOGLE_PLACES_API_KEY)
+        urlGooglePlaceDetail.searchParams.set(PARAM_KEY, process.env.EXPO_PUBLIC_GOOGLE_PLACES_API_KEY)
     }
     try {
         const response = await fetch(urlGooglePlaceDetail);

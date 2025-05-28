@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setShowInfo } from '../../state/mapSlice'
 import ThemedText from '../ThemedText'
 import Spacer from '../Spacer';
+import t from '../../locales'
 
 const ThemedBottomSheet = ({children}) => {
     const bottomSheetRef = useRef(null)
@@ -58,9 +59,11 @@ const ThemedBottomSheet = ({children}) => {
         >
         <BottomSheetView style={styles.contentContainer}>
             <View>
-            <ThemedText title style={styles.text}>Location Name: {location.name}</ThemedText>
+            <ThemedText style={styles.label}>{t.location_info}</ThemedText>
             <Spacer height={16}/>
-            <ThemedText style={styles.text}>{location.description || 'Location Info'}</ThemedText>
+            <ThemedText title style={styles.text}>{location.name}</ThemedText>
+            <Spacer height={16}/>
+            <ThemedText style={styles.text}>{location.description || t.location_info}</ThemedText>
             </View>
         </BottomSheetView> 
     </BottomSheetModal>
@@ -80,6 +83,10 @@ const styles = StyleSheet.create({
       flex: 1,
       padding: 36,
       alignItems: 'stretch',
+    },
+    label:{
+        fontSize:14,
+        width: '100%'
     },
     text:{
         fontSize:18,

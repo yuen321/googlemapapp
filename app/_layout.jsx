@@ -5,6 +5,7 @@ import { Stack } from 'expo-router'
 import { SQLiteProvider } from 'expo-sqlite'
 import { DATABASE_NAME, MapProvider, migrateDbIfNeeded } from '../contexts/MapContext'
 import { useThemedColor } from '../utils/ThemedColor'
+import t from '../locales'
 
 const RootLayout = () => {
   const theme = useThemedColor()
@@ -22,7 +23,7 @@ const RootLayout = () => {
               headerStyle:{backgroundColor: theme.navBackground},
               headerTintColor: theme.title
           }}>
-            <Stack.Screen name='(map)' options={{title: "Search Location", headerShown: false}}/>
+            <Stack.Screen name='(map)' options={{title: `${t.map}`, headerShown: false}}/>
         </Stack>
       </Provider>
     </MapProvider>

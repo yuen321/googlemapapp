@@ -10,6 +10,7 @@ import ThemedFooter from '../../components/ThemedFooter'
 import Spacer from '../../components/Spacer'
 import ThemedLoader from '../../components/ThemedLoader'
 import MapHistoryList from '../../components/(history)/MapHistoryList'
+import t from '../../locales'
 
 const SearchScreen = () => {
   const {location, markerCoordinate, shouldUpsertLocation, isLoading} = useSelector((state) => state.map)
@@ -80,7 +81,7 @@ const SearchScreen = () => {
             !isKeyboardVisible &&  <MapHistoryList enablePullToRefresh={false} numOfRecords={5} scrollEnabled={false}/>
           }
         </View>
-        <ThemedFooter text="More from recent history" handlePress={navigateToMapHistory}/>
+        <ThemedFooter text={t.footer_history} handlePress={navigateToMapHistory}/>
       </ThemedView>
     </TouchableWithoutFeedback>
   )

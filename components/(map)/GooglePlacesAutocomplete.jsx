@@ -1,9 +1,10 @@
 import { StyleSheet, View } from 'react-native'
 import React, { useRef } from 'react'
 import { GooglePlacesTextInputRef } from 'react-native-google-places-textinput'
-import { GOOGLE_PLACES_API_KEY, setLocatonName } from '../../state/mapSlice'
+import { setLocatonName } from '../../state/mapSlice'
 import { useSelector } from 'react-redux'
 import { useThemedColor } from '../../utils/ThemedColor'
+import t from '../../locales'
 
 const GooglePlacesAutocomplete = ({handlePlaceSelect = () => {}}) => {
   const theme = useThemedColor()
@@ -26,7 +27,7 @@ const GooglePlacesAutocomplete = ({handlePlaceSelect = () => {}}) => {
    <View style={styles.container}>
     <GooglePlacesTextInputRef
     inputRef = {inputRef}
-    apiKey={GOOGLE_PLACES_API_KEY}
+    apiKey={process.env.EXPO_PUBLIC_GOOGLE_PLACES_API_KEY}
     onPlaceSelect={onPlaceSelect}
     style={{
       container: styles.inputContainer,
@@ -45,7 +46,7 @@ const GooglePlacesAutocomplete = ({handlePlaceSelect = () => {}}) => {
         }
       ]
     }}
-    placeHolderText="Search"
+    placeHolderText={t.search}
     minCharsToFetch={3}
     value={locationName}
     onTextChange={setLocatonName}

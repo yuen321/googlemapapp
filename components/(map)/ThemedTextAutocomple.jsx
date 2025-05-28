@@ -2,6 +2,7 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import ThemedView from '../ThemedView'
 import { useThemedColor } from '../../utils/ThemedColor'
+import t from '../../locales'
 
 const ThemedTextAutocomple = ({text, handleOnPress = () => {}, safe= false}) => {
   const theme = useThemedColor()
@@ -9,7 +10,7 @@ const ThemedTextAutocomple = ({text, handleOnPress = () => {}, safe= false}) => 
   return (
     <ThemedView safe={safe} style={styles.container}>
       <TouchableOpacity style={[styles.searchBoxField, {backgroundColor: theme.uiBackground, borderColor: theme.border, shadowColor: theme.shadow}]} onPress={handleOnPress}>
-        <Text style={[styles.buttonLabel, {color: textColor}]}>{text ||  "Search"}</Text>
+        <Text style={[styles.buttonLabel, {color: textColor}]}>{text ||  t.search}</Text>
       </TouchableOpacity> 
     </ThemedView> 
   )

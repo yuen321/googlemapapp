@@ -1,4 +1,4 @@
-import { ActivityIndicator, FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native'
+import { ActivityIndicator, FlatList, RefreshControl} from 'react-native'
 import React, { useCallback, useEffect, useState } from 'react'
 import useMap from '../../hooks/useMap'
 import MapHistoryListItem from './MapHistoryListItem'
