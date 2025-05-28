@@ -1,5 +1,3 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
 import { Marker } from 'react-native-maps'
 
 import PinIcon from '../../assets/icons/custom_pin.png'
@@ -16,5 +14,3 @@ const ThemedMarker = ({latitude, longitude, styles, ...props}) => {
 }
 
 export default ThemedMarker
-
-const styles = StyleSheet.create({})
