@@ -9,6 +9,8 @@ The app allows users to search for locations, view their search history, and man
 - Marker and Location Selection: Users can select a location on the map, which will display a marker at the selected location.
 - Location Info Bottom Sheet: A bottom sheet appears with detailed information about the selected location.
 
+
+
 2. Select Location Screen
 - Search with Auto-Suggestions: Users can search for locations with auto-suggestions powered by a Google Places API.
 - Recent Searches: Displays the last 5 records of recent searches for quick access.
@@ -50,5 +52,11 @@ Stored data includes:
 2. Install Dependencies by executing :npm install
 3. Start the Expo Project:  npx expo start
 4. Scan QR code with Expo Go on your mobile device or an Android/iOS emulator.
+
+
+
+
+
+https://github.com/user-attachments/assets/df302e35-565e-4581-974c-c2696f8d7ea7
 
 
