@@ -46,10 +46,8 @@ Stored data includes:
 
 #  Getting Started
 
-1. Install Dependencies
-2. npm install
-3. Start the Expo Project
-3. npx expo start
-4. Scan QR code with Expo Go on your mobile device or an Android/iOS emulator.
+1. Install Dependencies by executing :npm install
+2. Start the Expo Project:  npx expo start
+3. Scan QR code with Expo Go on your mobile device or an Android/iOS emulator.
 
 
