@@ -46,8 +46,9 @@ Stored data includes:
 
 #  Getting Started
 
-1. Install Dependencies by executing :npm install
-2. Start the Expo Project:  npx expo start
-3. Scan QR code with Expo Go on your mobile device or an Android/iOS emulator.
+1. update GOOGLE_PLACE_API_KEY in .env file EXPO_PUBLIC_GOOGLE_PLACES_API_KEY={YOU_API_VALUE_HERE}
+2. Install Dependencies by executing :npm install
+3. Start the Expo Project:  npx expo start
+4. Scan QR code with Expo Go on your mobile device or an Android/iOS emulator.
 
 
