@@ -7,4 +7,5 @@ export default{
     search: "Search",
     location_info: "Location Information",
     location_name: "Location Name:",
+    no_result_found: "No result found"
 }

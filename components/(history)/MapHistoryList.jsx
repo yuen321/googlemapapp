@@ -1,4 +1,4 @@
-import { ActivityIndicator, FlatList, RefreshControl} from 'react-native'
+import { ActivityIndicator, FlatList, RefreshControl, StyleSheet, View} from 'react-native'
 import React, { useCallback, useEffect, useState } from 'react'
 import useMap from '../../hooks/useMap'
 import MapHistoryListItem from './MapHistoryListItem'
@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux'
 import { setLocationNameDesc, setMarkerCoordinate, setMapPosition, setShowInfo } from '../../state/mapSlice'
 import { router } from 'expo-router'
 import { useThemedColor } from '../../utils/ThemedColor'
+import t from '../../locales'
 
 const MapHistoryList = ({numOfRecords = 0, enablePullToRefresh = true, enableDeletion= false, scrollEnabled = true}) => {
     const theme = useThemedColor()
@@ -58,7 +59,11 @@ const MapHistoryList = ({numOfRecords = 0, enablePullToRefresh = true, enableDel
           enableDeletion={enableDeletion}
           />
         )}
-        ListEmptyComponent={<ThemedText>No result found</ThemedText>}
+        ListEmptyComponent={
+        <View style={styles.container}> 
+          <ThemedText>{t.no_result_found}</ThemedText>
+        </View>
+        }
         scrollEnabled = {scrollEnabled}
         /> 
     )
@@ -66,3 +71,11 @@ const MapHistoryList = ({numOfRecords = 0, enablePullToRefresh = true, enableDel
   
   export default MapHistoryList
   
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginVertical: 20,
+    }
+  })
